@@ -2,6 +2,95 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <title>Obasesam 💯</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+      background: #f7f7f7;
+      color: #222;
+    }
+    iframe {
+      border: 1px solid #ccc;
+      width: 100%;
+      height: 400px;
+      margin-top: 1rem;
+      background: #fff;
+    }
+    .url-bar {
+      margin-bottom: 1rem;
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    input[type="text"] {
+      flex: 1;
+      padding: 0.5rem;
+      border-radius: 4px;
+      border: 1px solid #bbb;
+    }
+    button {
+      padding: 0.5rem 1.25rem;
+      border: none;
+      border-radius: 4px;
+      background: #007acc;
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #005fa3;
+    }
+    .editor-container {
+      margin-top: 2rem;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+      max-width: 100%;
+    }
+    label {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    textarea {
+      width: 100%;
+      min-height: 60px;
+      font-family: monospace;
+      font-size: 1rem;
+      border-radius: 4px;
+      border: 1px solid #bbb;
+      padding: 0.5rem;
+      resize: vertical;
+      margin-bottom: 0.5rem;
+      background: #f8f8f8;
+    }
+    .copy-status {
+      color: green;
+      font-size: 0.95em;
+      margin-left: 1rem;
+      visibility: hidden;
+    }
+  </style>
+</head>
+<body>
+  <h1>Obasesam 💯</h1>
+  <div class="url-bar">
+    <label for="iframe-url">URL:</label>
+    <input type="text" id="iframe-url" value="https://example.com">
+    <button onclick="loadIframe()">Load</button>
+  </div>
+  <iframe id="main-iframe" src="https://example.com" allowfullscreen></iframe>
+
+  <div class="editor-container">
+    <label for="iframe-code">Copy the code below to embed the above URL in your own HTML file:</label>
+    <textarea id="iframe-code" readonly>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
   <title>Iframe Enabled Website</title>
   <style>
     body {
@@ -88,6 +177,29 @@
     <label for="iframe-code">Copy the code below to embed the above URL in your own HTML file:</label>
     <textarea id="iframe-code" readonly>
 <iframe src="https://example.com" width="100%" height="400" allowfullscreen></iframe>
+    
+
+  <script>
+    function loadIframe() {
+      const url = document.getElementById('iframe-url').value.trim();
+      document.getElementById('main-iframe').src = url;
+      document.getElementById('iframe-code').value =
+        `<iframe src="${url}" width="100%" height="400" allowfullscreen></iframe>`;
+      document.getElementById('copy-status').style.visibility = 'hidden';
+    }
+    function copyCode() {
+      const code = document.getElementById('iframe-code');
+      code.select();
+      code.setSelectionRange(0, 99999);
+      document.execCommand('copy');
+      document.getElementById('copy-status').style.visibility = 'visible';
+      setTimeout(function(){
+        document.getElementById('copy-status').style.visibility = 'hidden';
+      }, 1500);
+    }
+  </script>
+</body>
+</html>
     </textarea>
     <button onclick="copyCode()">Copy</button>
     <span class="copy-status" id="copy-status">Copied!</span>
